@@ -77,20 +77,22 @@ print(response.text)`,
               API v1.0 Platform is Live
             </div>
             
-            <h1 className="text-5xl lg:text-6xl xl:text-[76px] font-extrabold text-slate-900 dark:text-white tracking-tight mb-8 leading-[1.1]">
+            {/* FIX 1: Reduced text size here from text-7xl to text-5xl/6xl */}
+            <h1 className="text-4xl lg:text-5xl xl:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-6 leading-[1.1]">
               Architect the <br /> Future of Finance
             </h1>
             
-            <p className="text-lg lg:text-xl text-slate-600 dark:text-slate-300 mb-10 max-w-xl leading-relaxed font-medium">
+            {/* FIX 1: Slightly reduced paragraph text size */}
+            <p className="text-base lg:text-lg text-slate-600 dark:text-slate-300 mb-8 max-w-xl leading-relaxed font-medium">
               Connect your application to our enterprise-grade infrastructure. Instantly deploy secure, scalable APIs built specifically for modern financial workflows.
             </p>
 
             <div className="flex flex-wrap items-center justify-start gap-4">
-              <button className="px-8 py-4 bg-[#025f61] hover:bg-[#014849] text-white rounded-xl font-bold text-lg transition-all hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#025f61]/40 flex items-center gap-3">
-                Start Building <ArrowRight size={22} />
+              <button className="px-6 py-3 lg:px-8 lg:py-4 bg-[#025f61] hover:bg-[#014849] text-white rounded-xl font-bold text-base lg:text-lg transition-all hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#025f61]/40 flex items-center gap-3">
+                Start Building <ArrowRight size={20} />
               </button>
-              <button className="px-8 py-4 bg-white dark:bg-[#0a1f20] border-2 border-slate-200 dark:border-white/10 hover:border-[#025f61] dark:hover:border-teal-500 text-slate-800 dark:text-white rounded-xl font-bold text-lg transition-all hover:-translate-y-1 flex items-center gap-3 shadow-sm">
-                <Terminal size={22} /> View Documentation
+              <button className="px-6 py-3 lg:px-8 lg:py-4 bg-white dark:bg-[#0a1f20] border-2 border-slate-200 dark:border-white/10 hover:border-[#025f61] dark:hover:border-teal-500 text-slate-800 dark:text-white rounded-xl font-bold text-base lg:text-lg transition-all hover:-translate-y-1 flex items-center gap-3 shadow-sm">
+                <Terminal size={20} /> View Documentation
               </button>
             </div>
           </div>
@@ -146,7 +148,9 @@ print(response.text)`,
                       {codeSnippets[activeTab].split('\n').map((line, i) => (
                         <div key={i} className="whitespace-pre">
                           <span className="text-slate-600 select-none mr-4 inline-block w-4 text-right">{i + 1}</span>
-                          <span dangerouslySetInnerHTML={{
+                          
+                          {/* FIX 2: Added "text-slate-200" class here to force white/light gray text! */}
+                          <span className="text-slate-200" dangerouslySetInnerHTML={{
                             __html: line
                               .replace(/await|const|import|from/g, '<span class="text-purple-400">$&</span>')
                               .replace(/fetch|requests\.request|console\.log|print/g, '<span class="text-blue-400">$&</span>')
