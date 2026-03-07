@@ -62,13 +62,12 @@ print(response.text)`,
       {/* Main Container */}
       <div className="relative w-full max-w-[1400px] mx-auto px-6 lg:px-12 flex flex-col z-10">
         
-      
+        {/* THIS IS THE MAIN FLEX BOX THAT HOLDS THE TWO SIDES */}
         <div className="flex flex-col lg:flex-row items-center justify-between w-full gap-16 pt-10 pb-24">
           
-         
-          {/* RIGHT SIDE: Terminal Wrapper (Strictly ~50% width on large screens) */}
-          <div className="w-full lg:w-[48%] flex justify-end">
-             {/* LEFT SIDE: Pitch Content (Strictly 50% width on large screens) */}
+          {/* =========================================
+              LEFT SIDE: Text and Buttons Block
+              ========================================= */}
           <div className="w-full lg:w-[48%] text-left">
             <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white dark:bg-[#025f61]/10 text-[#025f61] dark:text-teal-300 font-bold text-[14px] mb-8 border border-slate-200 dark:border-[#025f61]/30 shadow-sm backdrop-blur-md">
               <span className="relative flex h-3 w-3">
@@ -79,10 +78,7 @@ print(response.text)`,
             </div>
             
             <h1 className="text-5xl lg:text-6xl xl:text-[76px] font-extrabold text-slate-900 dark:text-white tracking-tight mb-8 leading-[1.1]">
-              Architect the <br />
-              
-                Future of Finance
-
+              Architect the <br /> Future of Finance
             </h1>
             
             <p className="text-lg lg:text-xl text-slate-600 dark:text-slate-300 mb-10 max-w-xl leading-relaxed font-medium">
@@ -99,8 +95,10 @@ print(response.text)`,
             </div>
           </div>
 
-            
-            {/* 🚨 CRITICAL FIX: This 'relative' box now securely holds BOTH the terminal AND the floating card 🚨 */}
+          {/* =========================================
+              RIGHT SIDE: Terminal Code Block
+              ========================================= */}
+          <div className="w-full lg:w-[48%] flex justify-end">
             <div className="relative w-full max-w-[600px] mt-10 lg:mt-0">
               
               {/* Terminal Box */}
@@ -162,7 +160,7 @@ print(response.text)`,
                 </div>
               </div>
 
-              {/* 🚨 Floating 3D Response Card (Now properly anchored!) 🚨 */}
+              {/* Floating 3D Response Card */}
               <div className="absolute -bottom-12 -left-4 md:-left-12 bg-white dark:bg-[#112324] p-4 lg:p-5 rounded-xl shadow-2xl border border-slate-200 dark:border-teal-900/50 z-20 animate-[bounce_4s_infinite] w-[260px] lg:w-[280px]">
                 <div className="flex justify-between items-center mb-3">
                   <span className="text-[10px] lg:text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Live Response</span>
@@ -184,6 +182,7 @@ print(response.text)`,
 
             </div>
           </div>
+
         </div>
 
         {/* =========================================
