@@ -12,7 +12,11 @@ const app = express();
 
 // Tell the messenger to understand JSON (the language React speaks) and use CORS
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  // Put your exact Vercel URL in the quotes below!
+  origin: ["http://localhost:5173", "https://your-vercel-app-name.vercel.app"], 
+  credentials: true
+}));
 // Tell the messenger to use our new auth paths!
 app.use("/api/auth", authRoutes);
 
