@@ -14,6 +14,5 @@ export const apiList = [
     { id: 7, name: 'Bank Statement API', path: '/api/bank-statement', status: 'active' },
     { id: 8, name: 'Beneficiary Addition', path: '#', status: 'soon' },
   
-    // --- ADD MORE APIs HERE ---
-    // { id: 9, name: 'Card Management', path: '/api/card-management', status: 'active' },
+
   ];

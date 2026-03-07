@@ -26,9 +26,9 @@ const commonErrors = [
     // SLUG 1: account-statement
     "account-statement": {
       title: "Account Statement",
-      breadcrumbs: "Loans and Cards / Cards / Prepaid card / Account Statement",
+      breadcrumbs: "Payments / Banking / Bank Statement",
       method: null, // No method badge for this one
-      description: "This API is used for retrieving total Debit and Credit transaction details for particular months, Ledger Balance, Available Balance.",
+      description: "This API is used to fetch the account statement (upto 2000 records) of all registered account numbers of the customers.",
       terminalType: "XML",
       codeSnippet: `<xml>\n  <ReferenceNumber>20190704000016</ReferenceNumber>\n  <MerchantId>FLP0000001</MerchantId>\n  <MerchantPassword>admin12345</MerchantPassword>\n  <MonthYear>042019</MonthYear>\n  <CardNumber>4336620020565646</CardNumber>\n  <TransactionRemark>FLIPKART Card</TransactionRemark>\n</xml>`,
       inputData: [
@@ -118,5 +118,53 @@ const commonErrors = [
         { name: 'ErrorMessages', type: 'int', desc: 'if any error messaged produced.' }
       ],
       errorData: commonErrors
-    }
+    },
+
+    //section - B
+    // SLUG 4: bank-statement
+    "bank-statement": {
+        title: "bank-statement",
+        breadcrumbs: "Payments / BBPS / Agent / Agent Login",
+        method: "POST",
+        description: "This API is used by the agent to login, no authorization header is required to invoke this API. In case the user has not reset his password at least once, this API will provide agent data with password reset flag.",
+        terminalType: "JSON",
+        codeSnippet: 
+        `{
+            "CORPID": "PRACHICIB1",
+            "USERID": "USER3",
+            "AGGRID": "TXBCIB01N",
+            "ACCOUNTNO": "000405001257",
+            "FROMDATE": "01-01-2016",
+            "TODATE": "30-12-2016",
+            "URN": "15639710001"
+          }`,
+        inputData: [
+            { name: 'AGGRID', type: 'Alphanumeric', desc: 'Unique id created by ICICI for customer to perform authorized/regulated transactions.', mandatory: 'Y' },
+            { name: 'CORPID', type: 'Alphanumeric', desc: 'Corporate ID assigned for the Corporate Internet Banking (CIB).', mandatory: 'Y' },
+            { name: 'USERID', type: 'Alphanumeric', desc: 'User ID under Corporate ID in CIB.', mandatory: 'Y' },
+            { name: 'ACCOUNTNO', type: 'Alphanumeric', desc: 'Account Number mapped to user.', mandatory: 'Y' },
+            { name: 'FROMDATE', type: 'Date', desc: 'From date (DD-MM-YYYY).', mandatory: 'Y' },
+            { name: 'TODATE', type: 'Date', desc: 'To date (DD-MM-YYYY).', mandatory: 'Y' },
+            { name: 'URN', type: 'Alphanumeric', desc: 'URN provided at Registration time.', mandatory: 'Y' },
+          ],
+        outputData: [
+            { name: 'AGGRID', type: 'Alphanumeric', desc: 'Unique id created for authorized transactions' },
+            { name: 'CORPID', type: 'Alphanumeric', desc: 'Corporate ID assigned for CIB.' },
+            { name: 'USERID', type: 'Alphanumeric', desc: 'User ID under Corporate ID' },
+            { name: 'ACCOUNTNO', type: 'Alphanumeric', desc: 'Account Number mapped to user' },
+            { name: 'URN', type: 'Alphanumeric', desc: 'URN provided at Registration time' },
+            { name: 'Record', type: 'Nested JSON', desc: 'Contain bank statement records' },
+            { name: 'MESSAGE', type: 'Text', desc: 'Error Message (Not available in Success)' },
+            { name: 'RESPONSE', type: 'Text', desc: 'API Response: "SUCCESS" or "FAILURE"' },
+          ],
+        errorData: [
+            { code: '8000', name: 'Invalid Encrypted Request', logs: 'Decryption Failure' },
+            { code: '8001', name: 'Json Is Empty', logs: 'Json Schema Request Empty' },
+            { code: '8002', name: 'Invalid Json', logs: 'Json Is Not Valid.' },
+            { code: '8004', name: 'Missing Required Field Data', logs: 'Mandatory Field Data Is Missing.' },
+            { code: '8005', name: 'Missing Required Field', logs: 'Mandatory Field Is Missing.' },
+            { code: '8010', name: 'Internal Service Failure', logs: 'Routing Failure.' },
+            { code: '8012', name: 'Backend Connection Timeout', logs: 'When Connection Gets Timeout' },
+          ]
+      }
   };
