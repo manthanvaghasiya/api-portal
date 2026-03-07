@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Search, ChevronRight, ArrowUp, FileJson, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SandboxNavbar from '../sandbox/SandboxNavbar';
+
+// IMPORT THE DATA FROM YOUR NEW FILE
+import { apiList } from '../sandbox/apiData';
 
 const Sandbox = () => {
   const [showTopBtn, setShowTopBtn] = useState(false);
@@ -25,6 +28,20 @@ const Sandbox = () => {
   };
 
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // SEARCH & GROUPING LOGIC
+  const groupedAPIs = useMemo(() => {
+    const filtered = apiList.filter((api) => 
+      api.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+    return filtered.reduce((acc, api) => {
+      const firstLetter = api.name.charAt(0).toUpperCase();
+      if (!acc[firstLetter]) acc[firstLetter] = [];
+      acc[firstLetter].push(api);
+      return acc;
+    }, {});
+  }, [searchQuery]);
 
   return (
     <div className="flex flex-row min-h-screen bg-slate-50 font-sans text-slate-700 pt-24 ">
@@ -57,118 +74,95 @@ const Sandbox = () => {
 
           {/* ALPHABET NAVIGATION */}
           <div className="flex flex-row justify-between items-center max-w-6xl mx-auto">
-            {letters.map((letter) => (
-              <button
-                key={letter}
-                onClick={() => scrollToLetter(letter)}
-                className="w-7 h-7 flex items-center justify-center rounded text-slate-500 font-semibold text-[13px] transition-all duration-200 hover:bg-[#025f61] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#025f61]/50"
-              >
-                {letter}
-              </button>
-            ))}
+            {letters.map((letter) => {
+              const hasItems = groupedAPIs[letter] && groupedAPIs[letter].length > 0;
+              return (
+                <button
+                  key={letter}
+                  onClick={() => scrollToLetter(letter)}
+                  disabled={!hasItems}
+                  className={`w-7 h-7 flex items-center justify-center rounded text-[13px] transition-all duration-200 
+                    ${hasItems 
+                      ? 'text-slate-500 font-semibold hover:bg-[#025f61] hover:text-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#025f61]/50' 
+                      : 'text-slate-300 cursor-not-allowed opacity-50'}`}
+                >
+                  {letter}
+                </button>
+              )
+            })}
           </div>
         </div>
 
         {/* API DIRECTORY LIST */}
         <div className="px-8 md:px-12 py-8 max-w-6xl mx-auto">
           
-          {/* SECTION A */}
-          <div id="section-A" className="mb-12 scroll-mt-40">
-            <div className="flex items-center gap-3 mb-5">
-              <h2 className="text-2xl font-bold text-[#025f61]">A</h2>
-              <div className="h-px bg-slate-200 flex-1"></div>
+          {/* Empty state for search */}
+          {Object.keys(groupedAPIs).length === 0 && (
+            <div className="text-center py-20 text-slate-500">
+              <p className="text-lg">No APIs found matching "{searchQuery}"</p>
             </div>
+          )}
 
-            {/* FLEX WRAP CONTAINER - Stops items from stretching */}
-            <div className="grid grid-cols-3 gap-4">
-              
-              {/* Active API Links */}
-              {[
-                { name: 'Account Statement', path: '/api/account-statement' },
-                { name: 'Add Funds API', path: '/api/add-funds' },
-                { name: 'Agent Login', path: '/api/agent-login' }
-              ].map((api) => (
-                <Link
-                  key={api.name}
-                  to={api.path}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  // STRICT WIDTH APPLIED HERE (w-full on mobile, fixed w-72 on larger screens)
-                  className="w-full sm:w-72 group flex items-center justify-between p-3 bg-white border border-slate-200 rounded-xl hover:border-[#025f61] hover:shadow-sm transition-all duration-200"
-                >
-                  <div className="flex items-center gap-2 overflow-hidden">
-                    <FileJson size={14} className="text-[#025f61]/60 group-hover:text-[#025f61] shrink-0" />
-                    <span className="text-[13px] font-semibold text-slate-700 group-hover:text-[#025f61] truncate">
-                      {api.name}
-                    </span>
-                  </div>
-                  <ChevronRight size={14} className="text-slate-300 group-hover:text-[#025f61] group-hover:translate-x-0.5 transition-all shrink-0" />
-                </Link>
-              ))}
+          {/* DYNAMIC LISTING */}
+          {letters.map((letter) => {
+            const apisForThisLetter = groupedAPIs[letter];
 
-              {/* Disabled/Placeholder APIs */}
-              {[
-                'Account Balance Fetch',
-                'Account Creation',
-                'Application Status Check'
-              ].map((api) => (
-                <div 
-                  key={api} 
-                  // STRICT WIDTH APPLIED HERE
-                  className="w-full sm:w-72 flex items-center justify-between p-3 bg-slate-50 border border-slate-200 border-dashed rounded-xl opacity-80 cursor-not-allowed"
-                >
-                  <div className="flex items-center gap-2 overflow-hidden">
-                    <Clock size={14} className="text-slate-400 shrink-0" />
-                    <span className="text-[13px] font-medium text-slate-500 truncate">
-                      {api}
-                    </span>
-                  </div>
-                  <span className="text-[9px] font-bold uppercase tracking-wider text-slate-500 bg-slate-200 px-1.5 py-0.5 rounded shrink-0">
-                    Soon
-                  </span>
+            if (!apisForThisLetter || apisForThisLetter.length === 0) return null;
+
+            return (
+              <div key={letter} id={`section-${letter}`} className="mb-12 scroll-mt-40">
+                <div className="flex items-center gap-3 mb-5">
+                  <h2 className="text-2xl font-bold text-[#025f61]">{letter}</h2>
+                  <div className="h-px bg-slate-200 flex-1"></div>
                 </div>
-              ))}
-            </div>
-          </div>
 
-          {/* SECTION B */}
-          <div id="section-B" className="mb-12 scroll-mt-40">
-            <div className="flex items-center gap-3 mb-5">
-              <h2 className="text-2xl font-bold text-[#025f61]">B</h2>
-              <div className="h-px bg-slate-200 flex-1"></div>
-            </div>
+                {/* YOUR EXACT GRID DESIGN */}
+                <div className="grid grid-cols-3 gap-4">
+                  
+                  {apisForThisLetter.map((api) => (
+                    api.status === 'active' ? (
+                      
+                      /* ACTIVE API CARD */
+                      <Link
+                        key={api.id}
+                        to={api.path}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full sm:w-72 group flex items-center justify-between p-3 bg-white border border-slate-200 rounded-xl hover:border-[#025f61] hover:shadow-sm transition-all duration-200"
+                      >
+                        <div className="flex items-center gap-2 overflow-hidden">
+                          <FileJson size={14} className="text-[#025f61]/60 group-hover:text-[#025f61] shrink-0" />
+                          <span className="text-[13px] font-semibold text-slate-700 group-hover:text-[#025f61] truncate">
+                            {api.name}
+                          </span>
+                        </div>
+                        <ChevronRight size={14} className="text-slate-300 group-hover:text-[#025f61] group-hover:translate-x-0.5 transition-all shrink-0" />
+                      </Link>
 
-            {/* FLEX WRAP CONTAINER */}
-            <div className="grid grid-cols-3 gap-4">
-              <Link
-                to="/api/bank-statement"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-72 group flex items-center justify-between p-3 bg-white border border-slate-200 rounded-xl hover:border-[#025f61] hover:shadow-sm transition-all duration-200"
-              >
-                <div className="flex items-center gap-2 overflow-hidden">
-                  <FileJson size={14} className="text-[#025f61]/60 group-hover:text-[#025f61] shrink-0" />
-                  <span className="text-[13px] font-semibold text-slate-700 group-hover:text-[#025f61] truncate">
-                    Bank Statement API
-                  </span>
+                    ) : (
+
+                      /* COMING SOON API CARD */
+                      <div 
+                        key={api.id} 
+                        className="w-full sm:w-72 flex items-center justify-between p-3 bg-slate-50 border border-slate-200 border-dashed rounded-xl opacity-80 cursor-not-allowed"
+                      >
+                        <div className="flex items-center gap-2 overflow-hidden">
+                          <Clock size={14} className="text-slate-400 shrink-0" />
+                          <span className="text-[13px] font-medium text-slate-500 truncate">
+                            {api.name}
+                          </span>
+                        </div>
+                        <span className="text-[9px] font-bold uppercase tracking-wider text-slate-500 bg-slate-200 px-1.5 py-0.5 rounded shrink-0">
+                          Soon
+                        </span>
+                      </div>
+
+                    )
+                  ))}
                 </div>
-                <ChevronRight size={14} className="text-slate-300 group-hover:text-[#025f61] group-hover:translate-x-0.5 transition-all shrink-0" />
-              </Link>
-
-              <div className="w-full sm:w-72 flex items-center justify-between p-3 bg-slate-50 border border-slate-200 border-dashed rounded-xl opacity-80 cursor-not-allowed">
-                <div className="flex items-center gap-2 overflow-hidden">
-                  <Clock size={14} className="text-slate-400 shrink-0" />
-                  <span className="text-[13px] font-medium text-slate-500 truncate">
-                    Beneficiary Addition
-                  </span>
-                </div>
-                <span className="text-[9px] font-bold uppercase tracking-wider text-slate-500 bg-slate-200 px-1.5 py-0.5 rounded shrink-0">
-                  Soon
-                </span>
               </div>
-            </div>
-          </div>
-
+            );
+          })}
         </div>
 
         {/* FLOATING BACK TO TOP BUTTON */}

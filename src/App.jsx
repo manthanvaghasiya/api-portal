@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import AgentLoginDetail from './sandbox/AgentLoginDetail';
+// import AgentLoginDetail from './sandbox/AgentLoginDetail';
 import Home from './pages/Home';
 import StrategicPartners from './pages/StrategicPartners';
 import FAQ from './pages/FAQ';
@@ -9,9 +9,10 @@ import ExploreAPIs from './pages/ExploreAPIs';
 import Sandbox from './pages/Sandbox';
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
-import AccountStatementDetail from './sandbox/AccountStatementDetail';
-import AddFundsDetail from './sandbox/AddFundsDetail';
-import BankStatementDetail from './sandbox/BankStatementDetail';
+// import AccountStatementDetail from './sandbox/AccountStatementDetail';
+// import AddFundsDetail from './sandbox/AddFundsDetail';
+// import BankStatementDetail from './sandbox/BankStatementDetail';
+import ApiDetailTemplate from './sandbox/ApiDetailTemplate';
 
 export default function App() {
   return (
@@ -29,11 +30,11 @@ export default function App() {
           <Route path="/sandbox" element={<Sandbox />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signin" element={<SignIn />} />
-          <Route path="/api/agent-login" element={<AgentLoginDetail />} />
+          {/* <Route path="/api/agent-login" element={<AgentLoginDetail />} />
           <Route path="/api/account-statement" element={<AccountStatementDetail />} />
           <Route path="/api/add-funds" element={<AddFundsDetail />} />
-          <Route path="/api/bank-statement" element={<BankStatementDetail />} />
-          
+          <Route path="/api/bank-statement" element={<BankStatementDetail />} /> */}
+          <Route path="/api/:slug" element={<ApiDetailTemplate />} />
         </Routes>
       </main>
       
