@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Sparkles, Sun, Moon } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { User, LogOut } from 'lucide-react'; // We bring in some cool icons!
 
 const Navbar = () => {
   const location = useLocation();
@@ -33,6 +35,25 @@ const Navbar = () => {
 
   const isActive = (path) => {
     return location.pathname === path;
+  };
+
+  // 1. Tool to move the user to different pages
+  const navigate = useNavigate();
+
+  // 2. A switch to open and close the profile menu
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+
+  // 3. Check the pocket for the ticket and user details
+  const token = localStorage.getItem("token");
+  // We use JSON.parse to turn the saved text back into an object
+  const user = JSON.parse(localStorage.getItem("user")); 
+
+  // 4. The function to throw away the ticket when logging out
+  const handleLogout = () => {
+    localStorage.removeItem("token"); // Throw away the ticket
+    localStorage.removeItem("user");  // Throw away the user details
+    setIsProfileOpen(false);          // Close the menu
+    navigate("/signin");              // Send them back to the login page
   };
 
   return (
@@ -120,29 +141,58 @@ const Navbar = () => {
 
         </div>
 
-        {/* RIGHT SIDE: The Controls & Auth Buttons */}
-        <div className="flex items-center space-x-3 pr-2">
-          
-          <button 
-            onClick={toggleTheme}
-            className="p-2.5 mr-2 rounded-full bg-slate-100 dark:bg-white/10 text-slate-500 dark:text-yellow-400 hover:scale-110 hover:text-[#025f61] hover:shadow-md transition-all duration-300 border border-slate-200 dark:border-white/5"
-            title="Toggle Light/Dark Mode"
-          >
-            {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
-          </button>
+        {/* THE SMART PROFILE SECTION */}
+<div className="relative">
+  
+  {token ? (
+    // IF THEY ARE LOGGED IN: Show the Profile Button
+    <div>
+      <button 
+        onClick={() => setIsProfileOpen(!isProfileOpen)} 
+        className="flex items-center space-x-2 bg-[#0a5e54] text-white px-4 py-2 rounded-full hover:bg-[#084d46] transition"
+      >
+        <User size={18} />
+        <span>{user?.fullName || "My Profile"}</span>
+      </button>
 
-          <Link to="/signin" className="px-4 py-2 text-sm font-bold text-slate-600 dark:text-white hover:text-[#025f61] dark:hover:text-teal-200 transition-colors">
-            Sign In
-          </Link>
+      {/* THE DROPDOWN MENU */}
+      {isProfileOpen && (
+        <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl border overflow-hidden z-50">
           
-          <Link to="/signup" className="group flex items-center gap-2 px-6 py-2.5 text-sm font-bold text-white dark:text-[#025f61] bg-[#025f61] dark:bg-white rounded-full hover:bg-[#014849] dark:hover:bg-slate-100 hover:scale-105 hover:shadow-[0_8px_20px_-6px_rgba(2,95,97,0.6)] dark:hover:shadow-[0_8px_20px_-6px_rgba(255,255,255,0.4)] transition-all duration-300">
-            
-            Sign Up
-          </Link>
+          {/* Show their email at the top */}
+          <div className="px-4 py-3 bg-gray-50 border-b text-sm text-gray-600 truncate">
+            {user?.email}
+          </div>
+
+          {/* Logout Button */}
+          <button 
+            onClick={handleLogout}
+            className="w-full text-left px-4 py-3 text-red-600 hover:bg-red-50 flex items-center space-x-2 transition"
+          >
+            <LogOut size={16} />
+            <span>Logout</span>
+          </button>
+          
         </div>
+      )}
+    </div>
+  ) : (
+    // IF THEY ARE NOT LOGGED IN: Show normal buttons
+    <div className="space-x-4">
+      <Link to="/signin" className="text-[#0a5e54] font-semibold hover:underline ">
+        Sign In
+      </Link>
+      <Link to="/signup" className="bg-[#0a5e54] text-white px-6 py-2 rounded-full hover:bg-[#084d46] transition">
+        Sign Up
+      </Link>
+    </div>
+  )}
+  
+</div>
 
       </nav>
     </div>
+
   );
 };
 
