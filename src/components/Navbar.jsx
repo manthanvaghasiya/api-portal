@@ -77,7 +77,7 @@ const Navbar = () => {
             <div className="bg-slate-100 dark:bg-white/10 p-2 rounded-full group-hover:bg-slate-200 dark:group-hover:bg-white/20 group-hover:scale-105 transition-all duration-300">
                 <img className="h-6 w-auto" src="/logo.png" alt="SaaS Logo" />
             </div>
-            <span className="font-extrabold text-xl tracking-tight text-slate-800 dark:text-white transition-colors">Api Portal</span>
+            <span className="font-extrabold text-xl tracking-tight text-slate-800 dark:text-white transition-colors">Arcelor Api-Portal</span>
           </Link>
         </div>
 
@@ -179,7 +179,7 @@ const Navbar = () => {
   ) : (
     // IF THEY ARE NOT LOGGED IN: Show normal buttons
     <div className="space-x-4">
-      <Link to="/signin" className="text-[#0a5e54] font-semibold hover:underline ">
+      <Link to="/signin" className="text-[#0a5e54] font-semibold hover:underline pr-4">
         Sign In
       </Link>
       <Link to="/signup" className="bg-[#0a5e54] text-white px-6 py-2 rounded-full hover:bg-[#084d46] transition">

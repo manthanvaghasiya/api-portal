@@ -57,7 +57,7 @@ const Signup = () => {
         <div className="w-1/2 relative bg-[#0f6d61] text-white flex items-center justify-center">
           <div className="absolute inset-0 bg-[#0a5e54] rounded-r-[200px]" />
           <div className="relative z-10 text-center px-10">
-            <div className="text-2xl font-bold mb-6">Api Portal</div>
+            <div className="text-2xl font-bold mb-6">Arcelor Api-Portal</div>
             <h2 className="text-3xl font-semibold mb-2">Architect the Future of Finance</h2>
             <p className="text-sm opacity-90 mb-8">
               To stay connected with us please login with your personal info

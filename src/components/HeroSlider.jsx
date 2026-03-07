@@ -75,7 +75,7 @@ print(response.text)`,
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-[#025f61] dark:bg-teal-500"></span>
               </span>
-              API v2.0 Platform is Live
+              API v1.0 Platform is Live
             </div>
             
             <h1 className="text-5xl lg:text-6xl xl:text-[76px] font-extrabold text-slate-900 dark:text-white tracking-tight mb-8 leading-[1.1]">

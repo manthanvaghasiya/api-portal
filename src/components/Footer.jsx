@@ -101,7 +101,7 @@ const Footer = () => {
         <div className="flex items-center justify-between pt-8 border-t border-slate-200 dark:border-white/5">
           <div className="flex items-center gap-8">
             <p className="text-xs font-medium text-slate-500 dark:text-teal-50/20">
-              © {currentYear} API portal Inc.
+              © {currentYear} Arcelor Api-Portal Inc.
             </p>
             <div className="flex items-center gap-2 text-xs font-medium text-slate-500 hover:text-slate-800 dark:text-teal-50/20 cursor-pointer dark:hover:text-teal-50/40 transition-colors">
               <Globe size={14} />
