@@ -28,7 +28,7 @@ export default function App() {
           <Route path="/partners" element={<StrategicPartners />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/explore" element={<ExploreAPIs />} />
-          <Route path="/sandbox" element={<Sandbox />} />
+          {/* <Route path="/sandbox" element={<Sandbox />} /> */}
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signin" element={<SignIn />} />
           {/* <Route path="/api/agent-login" element={<AgentLoginDetail />} />
@@ -36,10 +36,13 @@ export default function App() {
           <Route path="/api/add-funds" element={<AddFundsDetail />} />
           <Route path="/api/bank-statement" element={<BankStatementDetail />} /> */}
           <Route path="/api/:slug" element={<ApiDetailTemplate />} />
-          <Route path="/" element={<ProtectedRoute>
-            <Sandbox />
-          </ProtectedRoute>
-          }
+          <Route 
+            path="/sandbox" 
+            element={
+              <ProtectedRoute>
+                <Sandbox />
+              </ProtectedRoute>
+            } 
           />
         </Routes>
       </main>
