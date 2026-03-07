@@ -47,18 +47,16 @@ const Footer = () => {
   return (
     <footer className="w-full transition-colors duration-300">
         {/* 3. MIDDLE TIER: NAVIGATION GRID */}
-        <div className="grid grid-cols-12 gap-4 border-t border-slate-200 dark:border-white/10 pt-16 mb-16">
+        <div className="grid grid-cols-12 gap-4 border-t border-slate-200 dark:border-white/10 p-16 mb-16">
           
           <div className="col-span-4">
-          <div className="col-span-5 space-y-8">
-            <Link to="/" className="flex items-center gap-4 group w-fit">
-              <div className="w-12 h-12 bg-[#025f61] rounded-2xl flex items-center justify-center shadow-[0_0_20px_rgba(2,95,97,0.3)] group-hover:scale-110 transition-transform duration-500">
-                <Zap className="w-6 h-6 text-white fill-white" />
-              </div>
-              <span className="text-3xl font-bold tracking-tighter text-[#025f61] dark:text-teal-400">
-                API<span className="text-[#025f61] dark:text-teal-400">portal</span>
-              </span>
-            </Link>
+          <div className="  ">
+          <Link to="/" className="flex items-center  group">
+            <div className="bg-slate-100 dark:bg-white/10  rounded-full group-hover:bg-slate-200 dark:group-hover:bg-white/20 group-hover:scale-105 transition-all duration-300">
+                <img className="h-10 w-auto" src="/logo.png" alt="SaaS Logo" />
+            </div>
+            <span className="font-bold text-xl tracking-tight text-slate-800 dark:text-white transition-colors">Arcelor Api-Portal</span>
+          </Link>
             
             <p className="text-xl text-slate-600 dark:text-teal-50/50 leading-relaxed max-w-md font-medium">
               Building the financial rails for the next generation of software. Secure, scalable, and developer-first.
@@ -68,10 +66,10 @@ const Footer = () => {
           </div>
           </div>
           
-          <div className="col-span-8 flex justify-between">
+          <div className="col-span-7 flex justify-between">
             {footerSections.map((section) => (
               <div key={section.title} className="flex flex-col gap-6">
-                <h4 className="text-[11px] font-black uppercase tracking-[0.3em] text-[#025f61] dark:text-teal-400">
+                <h4 className="text-[11px] font-black uppercase tracking-[0.3em] text-[#025f61] dark:text-teal-700">
                   {section.title}
                 </h4>
                 <ul className="space-y-4">
