@@ -73,9 +73,9 @@ const Navbar = () => {
         
         {/* LEFT SIDE: Logo Area */}
         <div className="flex items-center pl-2">
-          <Link to="/" className="flex items-center gap-3 group">
-            <div className="bg-slate-100 dark:bg-white/10 p-2 rounded-full group-hover:bg-slate-200 dark:group-hover:bg-white/20 group-hover:scale-105 transition-all duration-300">
-                <img className="h-6 w-auto" src="/logo.png" alt="SaaS Logo" />
+          <Link to="/" className="flex items-center  group">
+            <div className="bg-slate-100 dark:bg-white/10  rounded-full group-hover:bg-slate-200 dark:group-hover:bg-white/20 group-hover:scale-105 transition-all duration-300">
+                <img className="h-10 w-auto" src="/logo.png" alt="SaaS Logo" />
             </div>
             <span className="font-extrabold text-xl tracking-tight text-slate-800 dark:text-white transition-colors">Arcelor Api-Portal</span>
           </Link>
