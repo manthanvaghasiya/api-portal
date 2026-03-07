@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { User, LogOut, Menu, X } from 'lucide-react'; // Added Menu & X for mobile
+import { User, LogOut, Menu, X, Sun, Moon } from 'lucide-react'; // Brought back Sun and Moon!
 
 const Navbar = () => {
   const location = useLocation();
@@ -8,7 +8,10 @@ const Navbar = () => {
   
   const [isScrolled, setIsScrolled] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // Mobile Menu State
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  
+  // Dark Mode State
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   // Check the pocket for the ticket and user details
   const token = localStorage.getItem("token");
@@ -28,6 +31,17 @@ const Navbar = () => {
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
 
+  // Dark Mode Toggle Function
+  const toggleTheme = () => {
+    if (isDarkMode) {
+      document.documentElement.classList.remove('dark');
+      setIsDarkMode(false);
+    } else {
+      document.documentElement.classList.add('dark');
+      setIsDarkMode(true);
+    }
+  };
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
@@ -38,7 +52,6 @@ const Navbar = () => {
 
   const isActive = (path) => location.pathname === path;
 
-  // Centralized Links for cleaner code
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'Strategic Partners', path: '/partners' },
@@ -89,10 +102,20 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* RIGHT SIDE: Profile / Auth (Desktop) */}
-        <div className="hidden lg:block relative">
+        {/* RIGHT SIDE: Theme + Profile / Auth (Desktop) */}
+        <div className="hidden lg:flex items-center gap-4 relative">
+          
+          {/* THEME TOGGLE BUTTON (DESKTOP) */}
+          <button 
+            onClick={toggleTheme}
+            className="p-2 rounded-full text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-white/10 transition-colors"
+            aria-label="Toggle Dark Mode"
+          >
+            {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+          </button>
+
           {token ? (
-            <div>
+            <div className="relative">
               <button 
                 onClick={() => setIsProfileOpen(!isProfileOpen)} 
                 className="flex items-center space-x-2 bg-[#0a5e54] text-white px-4 py-2 rounded-full hover:bg-[#084d46] transition"
@@ -128,8 +151,17 @@ const Navbar = () => {
           )}
         </div>
 
-        {/* MOBILE: Hamburger Button */}
-        <div className="lg:hidden flex items-center">
+        {/* MOBILE: Theme Toggle + Hamburger Button */}
+        <div className="lg:hidden flex items-center gap-2">
+          
+          {/* THEME TOGGLE BUTTON (MOBILE) */}
+          <button 
+            onClick={toggleTheme}
+            className="p-2 rounded-full text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-white/10 transition-colors"
+          >
+            {isDarkMode ? <Sun size={22} /> : <Moon size={22} />}
+          </button>
+
           <button 
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="text-slate-600 dark:text-slate-300 hover:text-[#0a5e54] p-2"
