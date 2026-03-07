@@ -1,0 +1,17 @@
+/* 1. This loads the new Tailwind version */
+@import "tailwindcss";
+
+/* 2. This connects your toggle button to the dark mode classes */
+@variant dark (&:where(.dark, .dark *));
+
+/* 3. This changes the background color of the whole page smoothly */
+body {
+  background-color: white;
+  color: black;
+  transition: all 0.3s ease-in-out;
+}
+
+.dark body {
+  background-color: #011617;
+  color: white;
+}
