@@ -13,13 +13,14 @@ import SignIn from './pages/SignIn';
 // import AddFundsDetail from './sandbox/AddFundsDetail';
 // import BankStatementDetail from './sandbox/BankStatementDetail';
 import ApiDetailTemplate from './sandbox/ApiDetailTemplate';
+import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Your top navigation menu */}
       <Navbar />
-      
+
       {/* Your changing pages */}
       <main className="flex-grow">
         <Routes>
@@ -35,9 +36,14 @@ export default function App() {
           <Route path="/api/add-funds" element={<AddFundsDetail />} />
           <Route path="/api/bank-statement" element={<BankStatementDetail />} /> */}
           <Route path="/api/:slug" element={<ApiDetailTemplate />} />
+          <Route path="/" element={<ProtectedRoute>
+            <Sandbox />
+          </ProtectedRoute>
+          }
+          />
         </Routes>
       </main>
-      
+
       {/* Your bottom footer */}
       <Footer />
     </div>
