@@ -21,12 +21,7 @@ app.use(cors({
 
 // Tell the messenger to use our new auth paths!
 app.use("/api/auth", authRoutes);
-app.use("/api/admin", adminRoutes);
-
-// Connect to the Database (The Filing Cabinet)
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log("Database connected successfully! 🎉"))
-  .catch((err) => console.log("Database connection failed 😔", err));
+app.use("/api/admin", adminRoutes);s
 
 // A simple test route to say hello
 app.get("/", (req, res) => {
@@ -35,6 +30,15 @@ app.get("/", (req, res) => {
 
 // Turn the server on!
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT} 🚀`);
-});
+
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => {
+    console.log("✅ MongoDB connected successfully!");
+
+    app.listen(PORT, () => {
+      console.log(`🚀 Server running on port ${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error("❌ MongoDB connection failed:", err);
+  });

@@ -8,7 +8,12 @@ const router = express.Router();
 // ==========================================
 router.post("/add-api", async (req, res) => {
   try {
-    const newApi = new ApiItem(req.body);
+    const newApi = new ApiItem({
+  ...req.body,
+  inputData: [],
+  outputData: [],
+  errorData: []
+});
     await newApi.save();
 
     res.status(201).json({
