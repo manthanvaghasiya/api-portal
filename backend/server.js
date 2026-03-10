@@ -1,32 +1,40 @@
-import express from "express"
-import mongoose from "mongoose"
-import dotenv from "dotenv"
-import cors from "cors"
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
+import dotenv from "dotenv";
+import authRoutes from "./routes/auth.js";
+import adminRoutes from "./routes/admin.js";
 
-import authRoutes from "./routes/auth.js"
-import adminRoutes from "./routes/admin.js"
+// Open the secret safe
+dotenv.config();
 
-dotenv.config()
+// Create the messenger
+const app = express();
 
-const app = express()
+// Tell the messenger to understand JSON (the language React speaks) and use CORS
+app.use(express.json());
+app.use(cors({
+  // REMOVED the trailing slash from the vercel link!
+  origin: ["http://localhost:5173", "https://arcelorapiportal.vercel.app"], 
+  credentials: true
+}));
 
-app.use(cors())
-app.use(express.json())
+// Tell the messenger to use our new auth paths!
+app.use("/api/auth", authRoutes);
+app.use("/api/admin", adminRoutes);
 
-app.use("/api/auth", authRoutes)
-app.use("/api/admin", adminRoutes)
-
-const PORT = process.env.PORT || 5000
-
-// Connect DB then start server
+// Connect to the Database (The Filing Cabinet)
 mongoose.connect(process.env.MONGO_URI)
-.then(() => {
-  console.log("✅ MongoDB Connected")
+  .then(() => console.log("Database connected successfully! 🎉"))
+  .catch((err) => console.log("Database connection failed 😔", err));
 
-  app.listen(PORT, () => {
-    console.log(`🚀 Server running on port ${PORT}`)
-  })
-})
-.catch((err) => {
-  console.error("❌ MongoDB connection failed:", err)
-})
+// A simple test route to say hello
+app.get("/", (req, res) => {
+  res.send("Hello! The server is running!");
+});
+
+// Turn the server on!
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT} 🚀`);
+});
