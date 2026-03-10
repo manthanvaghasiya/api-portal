@@ -9,7 +9,7 @@ const JourneyLive = () => {
         {/* 1. HEADER AREA */}
         <div className="text-center mb-16 lg:mb-24 px-4">
           <h2 className="text-3xl lg:text-4xl font-light text-slate-800 dark:text-white mb-3 lg:mb-4">
-            Journey to <span className="font-bold text-[#025f61] dark:text-teal-400">Go Live</span>
+            Journey to <span className="font-extrabold text-[#025f61] dark:text-teal-400">Go Live</span>
           </h2>
           <p className="text-slate-500 dark:text-slate-400 text-base lg:text-lg">
             Three simple phases to integrate, test, and launch your application.

@@ -59,7 +59,7 @@ const Sandbox = () => {
           {/* 3. MOBILE SEARCH: Stack the title and search bar on small screens, side-by-side on big screens */}
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 max-w-6xl mx-auto mb-6">
             <div>
-              <h1 className="text-2xl md:text-3xl font-bold text-slate-800 mb-1">
+              <h1 className="text-2xl md:text-3xl font-extrabold text-slate-800 mb-1">
                 API Directory
               </h1>
               <p className="text-slate-500 text-sm">Browse 250+ endpoints and integrations.</p>

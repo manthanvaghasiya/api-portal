@@ -8,18 +8,21 @@ const router = express.Router();
 // ==========================================
 router.post("/add-api", async (req, res) => {
   try {
-    // Take everything the non-tech team typed in the form
     const newApi = new ApiItem(req.body);
-    
-    // Save it safely to the database
     await newApi.save();
-    
-    res.status(201).json({ message: "Success! API added to the portal.", data: newApi });
+
+    res.status(201).json({
+      message: "Success! API added to the portal.",
+      data: newApi
+    });
+
   } catch (error) {
-    res.status(500).json({ message: "Oops! Something went wrong.", error: error.message });
+    res.status(500).json({
+      message: "Oops! Something went wrong.",
+      error: error.message
+    });
   }
 });
-
 // ==========================================
 // 2. GET ALL APIs (To display on the Sandbox page later)
 // ==========================================
