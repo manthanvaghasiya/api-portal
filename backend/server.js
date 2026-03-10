@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 import authRoutes from "./routes/auth.js";
+import adminRoutes from "./routes/admin.js";
 
 // Open the secret safe
 dotenv.config();
@@ -20,6 +21,7 @@ app.use(cors({
 
 // Tell the messenger to use our new auth paths!
 app.use("/api/auth", authRoutes);
+app.use("/api/admin", adminRoutes);
 
 // Connect to the Database (The Filing Cabinet)
 mongoose.connect(process.env.MONGO_URI)
