@@ -71,7 +71,7 @@ const ApiDetailTemplate = () => {
       </div>
 
       <div className="flex-1 w-full px-4 py-6 md:px-12 md:py-10 overflow-y-auto">
-        
+
         {/* HEADER */}
         <div className="mb-6 md:mb-8 bg-white p-6 md:p-8 rounded-xl shadow-sm border border-slate-100">
           <div className="flex flex-wrap items-center gap-3 mb-3">
@@ -81,7 +81,7 @@ const ApiDetailTemplate = () => {
             </div>
           </div>
 
-          <h1 className="text-2xl md:text-4xl font-extrabold text-slate-900 mb-3 md:mb-4 tracking-tight">
+          <h1 className="text-2xl md:text-4xl font-bold text-slate-900 mb-3 md:mb-4 tracking-tight">
             {apiData.title}
           </h1>
           <p className="text-[14px] md:text-[16px] text-slate-600 leading-relaxed max-w-4xl">

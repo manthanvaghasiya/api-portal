@@ -66,7 +66,7 @@ const AddFundsDetail = () => {
             </div>
           </div>
           
-          <h1 className="text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">Add Funds API</h1>
+          <h1 className="text-4xl font-bold text-slate-900 mb-4 tracking-tight">Add Funds API</h1>
           
           <p className="text-[16px] text-slate-600 leading-relaxed max-w-4xl">
             This API is used for funding wallet based on mobile number.

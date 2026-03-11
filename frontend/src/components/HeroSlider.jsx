@@ -78,7 +78,7 @@ print(response.text)`,
             </div>
             
             {/* FIX 1: Reduced text size here from text-7xl to text-5xl/6xl */}
-            <h1 className="text-4xl lg:text-5xl xl:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-6 leading-[1.1]">
+            <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-slate-900 dark:text-white tracking-tight mb-6 leading-[1.1]">
               Architect the <br /> Future of Finance
             </h1>
             

@@ -9,7 +9,7 @@ const HowItWorks = () => {
         {/* TOP HEADER: Stacks on mobile, side-by-side on desktop */}
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-12 lg:mb-20 border-b border-slate-200 dark:border-white/10 pb-8 lg:pb-10 gap-6 lg:gap-0">
           <div>
-            <h2 className="text-3xl lg:text-4xl font-extrabold text-[#025f61] dark:text-teal-400 mb-4 tracking-tight">
+            <h2 className="text-3xl lg:text-4xl font-bold text-[#025f61] dark:text-teal-400 mb-4 tracking-tight">
               Collaborate, Build, Unleash
             </h2>
             <p className="text-lg lg:text-xl text-slate-500 dark:text-slate-400 max-w-2xl font-light">

@@ -88,7 +88,7 @@ const Sandbox = () => {
           
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 max-w-6xl mx-auto mb-6">
             <div>
-              <h1 className="text-2xl md:text-3xl font-extrabold text-slate-800 mb-1 flex items-center gap-3">
+              <h1 className="text-2xl md:text-3xl font-bold text-slate-800 mb-1 flex items-center gap-3">
                 API Directory 
                 {isLoadingDb && <Loader2 className="animate-spin text-[#025f61]" size={20} />}
               </h1>

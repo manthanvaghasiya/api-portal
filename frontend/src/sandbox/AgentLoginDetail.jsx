@@ -72,7 +72,7 @@ const AgentLoginDetail = () => {
             </div>
           </div>
           
-          <h1 className="text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">Agent Login</h1>
+          <h1 className="text-4xl font-bold text-slate-900 mb-4 tracking-tight">Agent Login</h1>
           
           <p className="text-[16px] text-slate-600 leading-relaxed max-w-4xl">
             This API is used by the agent to login, no authorization header is required to invoke this API. 

@@ -82,7 +82,7 @@ const ExploreAPIs = () => {
               <div className="animate-in fade-in duration-500">
                 
                 {/* Header Text */}
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 lg:mb-6">
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-4 lg:mb-6">
                   Welcome to Bank API Banking Portal!
                 </h1>
                 <p className="text-sm sm:text-base lg:text-lg text-slate-600 dark:text-slate-300 leading-relaxed mb-8 lg:mb-12">

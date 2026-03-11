@@ -65,7 +65,7 @@ const AccountStatementDetail = () => {
           <div className="text-green-600 text-[13px] font-bold uppercase tracking-wider mb-3">
             Loans and Cards / Cards / Prepaid card / Account Statement
           </div>
-          <h1 className="text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">Account Statement</h1>
+          <h1 className="text-4xl font-bold text-slate-900 mb-4 tracking-tight">Account Statement</h1>
           <p className="text-[16px] text-slate-600 leading-relaxed max-w-4xl">
             This API is used for retrieving total Debit and Credit transaction details for particular months, Ledger Balance, Available Balance.
           </p>
