@@ -11,14 +11,15 @@ dotenv.config();
 // Create the messenger
 const app = express();
 
-// Tell the messenger to understand JSON (the language React speaks) and use CORS
+// Tell the messenger to understand JSON and use CORS
 app.use(express.json());
 app.use(cors({
-  origin: process.env.FRONTEND_URL, 
+  // Accept requests from anywhere for now to ensure it's not a CORS blocking issue
+  origin: "*", 
   credentials: true
 }));
 
-// Tell the messenger to use our new auth paths!
+// Tell the messenger to use our routes
 app.use("/api/auth", authRoutes);
 app.use("/api/apis", apiRoutes);
 
