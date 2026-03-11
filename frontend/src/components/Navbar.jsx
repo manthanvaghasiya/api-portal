@@ -106,7 +106,7 @@ const Navbar = () => {
           {token && (
             <Link 
               to="/add-api" 
-              className={`flex items-center gap-1 px-5 py-2 text-sm font-bold rounded-full transition-all duration-300 ${
+              className={`flex items-center gap-1 px-5 py-2 text-sm font-semibold rounded-full transition-all duration-300 ${
                 isActive('/add-api') 
                   ? 'bg-[#0a5e54] text-white shadow-md' 
                   : 'text-[#0a5e54] hover:text-[#025f61] hover:bg-white dark:text-teal-400 dark:hover:text-white dark:hover:bg-white/10'
