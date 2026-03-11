@@ -154,7 +154,20 @@ const AddApi = () => {
               {formData.inputData.map((row, index) => (
                 <div key={index} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-3 p-4 bg-slate-50 dark:bg-[#111c24] rounded-xl border border-slate-200 dark:border-slate-700 relative">
                   <input type="text" placeholder="Name" value={row.name} onChange={(e) => updateRow('inputData', index, 'name', e.target.value)} className="md:col-span-3 px-3 py-2 rounded-lg text-sm border dark:border-slate-600 bg-white dark:bg-[#0d151c] dark:text-white outline-none" />
-                  <input type="text" placeholder="Type" value={row.type} onChange={(e) => updateRow('inputData', index, 'type', e.target.value)} className="md:col-span-3 px-3 py-2 rounded-lg text-sm border dark:border-slate-600 bg-white dark:bg-[#0d151c] dark:text-white outline-none" />
+                  <select 
+  value={row.type} 
+  onChange={(e) => updateRow('inputData', index, 'type', e.target.value)} 
+  className="md:col-span-3 px-3 py-2 rounded-lg text-sm border dark:border-slate-600 bg-white dark:bg-[#0d151c] dark:text-white outline-none cursor-pointer"
+>
+  <option value="Alphanumeric">Alphanumeric</option>
+  <option value="Numeric">Numeric</option>
+  <option value="String">String</option>
+  <option value="Boolean">Boolean</option>
+  <option value="Double">Double</option>
+  <option value="Date">Date</option>
+  <option value="Object">Object</option>
+  <option value="Array">Array</option>
+</select>
                   <input type="text" placeholder="Mandatory (Y/N)" value={row.mandatory} onChange={(e) => updateRow('inputData', index, 'mandatory', e.target.value)} className="md:col-span-2 px-3 py-2 rounded-lg text-sm border dark:border-slate-600 bg-white dark:bg-[#0d151c] dark:text-white outline-none" />
                   <input type="text" placeholder="Description" value={row.desc} onChange={(e) => updateRow('inputData', index, 'desc', e.target.value)} className="sm:col-span-2 md:col-span-3 px-3 py-2 rounded-lg text-sm border dark:border-slate-600 bg-white dark:bg-[#0d151c] dark:text-white outline-none" />
                   <button type="button" onClick={() => removeRow('inputData', index)} className="absolute top-2 right-2 md:static md:col-span-1 flex justify-center items-center text-red-500 hover:text-red-700 bg-red-50 dark:bg-red-500/10 p-2 rounded-lg">
@@ -179,7 +192,20 @@ const AddApi = () => {
               {formData.outputData.map((row, index) => (
                 <div key={index} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-3 p-4 bg-slate-50 dark:bg-[#111c24] rounded-xl border border-slate-200 dark:border-slate-700 relative">
                   <input type="text" placeholder="Name" value={row.name} onChange={(e) => updateRow('outputData', index, 'name', e.target.value)} className="md:col-span-3 px-3 py-2 rounded-lg text-sm border dark:border-slate-600 bg-white dark:bg-[#0d151c] dark:text-white outline-none" />
-                  <input type="text" placeholder="Type" value={row.type} onChange={(e) => updateRow('outputData', index, 'type', e.target.value)} className="md:col-span-3 px-3 py-2 rounded-lg text-sm border dark:border-slate-600 bg-white dark:bg-[#0d151c] dark:text-white outline-none" />
+                  <select 
+  value={row.type} 
+  onChange={(e) => updateRow('outputData', index, 'type', e.target.value)} 
+  className="md:col-span-3 px-3 py-2 rounded-lg text-sm border dark:border-slate-600 bg-white dark:bg-[#0d151c] dark:text-white outline-none cursor-pointer"
+>
+  <option value="Alphanumeric">Alphanumeric</option>
+  <option value="Numeric">Numeric</option>
+  <option value="String">String</option>
+  <option value="Boolean">Boolean</option>
+  <option value="Double">Double</option>
+  <option value="Date">Date</option>
+  <option value="Object">Object</option>
+  <option value="Array">Array</option>
+</select>
                   <input type="text" placeholder="Description" value={row.desc} onChange={(e) => updateRow('outputData', index, 'desc', e.target.value)} className="sm:col-span-2 md:col-span-5 px-3 py-2 rounded-lg text-sm border dark:border-slate-600 bg-white dark:bg-[#0d151c] dark:text-white outline-none" />
                   <button type="button" onClick={() => removeRow('outputData', index)} className="absolute top-2 right-2 md:static md:col-span-1 flex justify-center items-center text-red-500 hover:text-red-700 bg-red-50 dark:bg-red-500/10 p-2 rounded-lg">
                     <Trash2 size={18} />
