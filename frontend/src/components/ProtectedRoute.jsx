@@ -1,16 +1,16 @@
-import React from "react";
-import { Navigate } from "react-router-dom";
+import React from 'react';
+import { Navigate } from 'react-router-dom';
 
 const ProtectedRoute = ({ children }) => {
-  // Check the pocket for the VIP ticket
-  const token = localStorage.getItem("token");
+  // 1. Check if the user has a secret ticket (token) in their browser
+  const token = localStorage.getItem('token');
 
-  // If NO ticket, kick them to the sign-in page
+  // 2. If they do NOT have a ticket, send them straight to the Login page!
   if (!token) {
-    return <Navigate to="/signin" />;
+    return <Navigate to="/signin" replace />;
   }
 
-  // If HAVE ticket, open the door!
+  // 3. If they DO have a ticket, let them inside the Sandbox!
   return children;
 };
 

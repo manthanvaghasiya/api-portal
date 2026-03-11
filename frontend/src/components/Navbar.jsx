@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { User, LogOut, Menu, X, Sun, Moon } from 'lucide-react'; // Brought back Sun and Moon!
+import { User, LogOut, Menu, X, Sun, Moon,  } from 'lucide-react'; 
 
 const Navbar = () => {
   const location = useLocation();
@@ -52,6 +52,7 @@ const Navbar = () => {
 
   const isActive = (path) => location.pathname === path;
 
+  // The normal links everyone can see
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'Strategic Partners', path: '/partners' },
@@ -77,7 +78,7 @@ const Navbar = () => {
         <div className="flex items-center">
           <Link to="/" className="flex items-center group gap-2 lg:gap-3">
             <div className="bg-slate-100 dark:bg-white/10 rounded-full group-hover:bg-slate-200 dark:group-hover:bg-white/20 group-hover:scale-105 transition-all duration-300">
-                <img className="h-8 lg:h-10 w-auto p-1" src="/logo.png" alt="SaaS Logo" />
+                <img className="h-8 lg:h-10 w-auto p-1" src="/logo.png" alt="Logo" />
             </div>
             <span className="font-bold text-lg lg:text-xl tracking-tight text-slate-800 dark:text-white transition-colors">
               Arcelor Api-Portal
@@ -100,12 +101,26 @@ const Navbar = () => {
               {link.name}
             </Link>
           ))}
+
+          {/* SECRET DESKTOP LINK: Only shows if the user is logged in! */}
+          {token && (
+            <Link 
+              to="/add-api" 
+              className={`flex items-center gap-1 px-5 py-2 text-sm font-bold rounded-full transition-all duration-300 ${
+                isActive('/add-api') 
+                  ? 'bg-[#0a5e54] text-white shadow-md' 
+                  : 'text-[#0a5e54] hover:text-[#025f61] hover:bg-white dark:text-teal-400 dark:hover:text-white dark:hover:bg-white/10'
+              }`}
+            >
+               Add API
+            </Link>
+          )}
         </div>
 
         {/* RIGHT SIDE: Theme + Profile / Auth (Desktop) */}
         <div className="hidden lg:flex items-center gap-4 relative">
           
-          {/* THEME TOGGLE BUTTON (DESKTOP) */}
+          {/* THEME TOGGLE BUTTON */}
           <button 
             onClick={toggleTheme}
             className="p-2 rounded-full text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-white/10 transition-colors"
@@ -118,7 +133,7 @@ const Navbar = () => {
             <div className="relative">
               <button 
                 onClick={() => setIsProfileOpen(!isProfileOpen)} 
-                className="flex items-center space-x-2 bg-[#0a5e54] text-white px-4 py-2 rounded-full hover:bg-[#084d46] transition"
+                className="flex items-center space-x-2 bg-[#0a5e54] text-white px-4 py-2 rounded-full hover:bg-[#084d46] transition shadow-md shadow-[#0a5e54]/20"
               >
                 <User size={18} />
                 <span>{user?.fullName?.split(" ")[0] || "Profile"}</span>
@@ -144,7 +159,7 @@ const Navbar = () => {
               <Link to="/signin" className="text-[#0a5e54] dark:text-teal-400 font-semibold hover:underline px-4">
                 Sign In
               </Link>
-              <Link to="/signup" className="bg-[#0a5e54] text-white px-6 py-2 rounded-full hover:bg-[#084d46] transition">
+              <Link to="/signup" className="bg-[#0a5e54] text-white px-6 py-2 rounded-full hover:bg-[#084d46] transition shadow-md shadow-[#0a5e54]/20">
                 Sign Up
               </Link>
             </div>
@@ -154,7 +169,6 @@ const Navbar = () => {
         {/* MOBILE: Theme Toggle + Hamburger Button */}
         <div className="lg:hidden flex items-center gap-2">
           
-          {/* THEME TOGGLE BUTTON (MOBILE) */}
           <button 
             onClick={toggleTheme}
             className="p-2 rounded-full text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-white/10 transition-colors"
@@ -190,6 +204,20 @@ const Navbar = () => {
                 {link.name}
               </Link>
             ))}
+
+            {/* SECRET MOBILE LINK: Only shows if logged in! */}
+            {token && (
+              <Link 
+                to="/add-api" 
+                className={`flex items-center gap-2 px-4 py-3 rounded-xl font-bold transition-colors ${
+                  isActive('/add-api')
+                    ? 'bg-[#0a5e54]/10 text-[#0a5e54] dark:bg-[#0a5e54]/20 dark:text-teal-400'
+                    : 'text-[#0a5e54] dark:text-teal-400 hover:bg-slate-50 dark:hover:bg-white/5'
+                }`}
+              >
+                 Add API
+              </Link>
+            )}
 
             <hr className="my-2 border-slate-200 dark:border-white/10" />
 

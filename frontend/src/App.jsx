@@ -14,7 +14,7 @@ import SignIn from './pages/SignIn';
 // import BankStatementDetail from './sandbox/BankStatementDetail';
 import ApiDetailTemplate from './sandbox/ApiDetailTemplate';
 import ProtectedRoute from "./components/ProtectedRoute";
-
+import AddApi from './pages/AddApi';
 
 export default function App() {
   return (
@@ -45,7 +45,7 @@ export default function App() {
               </ProtectedRoute>
             } 
           />
-          
+          <Route path="/add-api" element={<ProtectedRoute><AddApi /></ProtectedRoute>} />
         </Routes>
       </main>
 
