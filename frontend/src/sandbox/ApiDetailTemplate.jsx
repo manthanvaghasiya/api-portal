@@ -73,7 +73,7 @@ const ApiDetailTemplate = () => {
             </div>
           </div>
 
-          <h1 className="text-2xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-3 md:mb-4 tracking-tight">
+          <h1 className="text-2xl md:text-4xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 tracking-tight">
             {apiData.title}
           </h1>
           <p className="text-[14px] md:text-[16px] text-slate-600 dark:text-slate-400 leading-relaxed max-w-4xl">
