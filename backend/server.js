@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 import authRoutes from "./routes/auth.js";
-
+import apiRoutes from "./routes/apiRoutes.js";
 
 // Open the secret safe
 dotenv.config();
@@ -20,7 +20,7 @@ app.use(cors({
 
 // Tell the messenger to use our new auth paths!
 app.use("/api/auth", authRoutes);
-
+app.use("/api/apis", apiRoutes);
 
 // A simple test route to say hello
 app.get("/", (req, res) => {
