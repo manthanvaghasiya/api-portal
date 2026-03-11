@@ -117,13 +117,14 @@ const AddApi = () => {
                 <input type="text" name="breadcrumbs" value={formData.breadcrumbs} onChange={handleChange} placeholder="e.g. Payments / BBPS / Agent" className="w-full px-4 py-2.5 bg-slate-50 dark:bg-[#111c24] border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white focus:ring-2 focus:ring-[#0a5e54] outline-none" />
               </div>
               <div>
-                <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Method</label>
-                <select name="method" value={formData.method} onChange={handleChange} className="w-full px-4 py-2.5 bg-slate-50 dark:bg-[#111c24] border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white focus:ring-2 focus:ring-[#0a5e54] outline-none">
-                  <option>POST</option>
-                  <option>GET</option>
-                  <option>PUT</option>
-                  <option>DELETE</option>
-                </select>
+               <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Method</label>
+                <input 
+                type="text" 
+                name="method" 
+                value={formData.method} 
+                readOnly 
+                className="w-full px-4 py-2.5 bg-slate-200 dark:bg-[#1a2630] border border-slate-200 dark:border-slate-700 rounded-xl text-slate-500 dark:text-slate-400 cursor-not-allowed outline-none font-bold" 
+               />
               </div>
               <div>
                 <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Terminal Type</label>

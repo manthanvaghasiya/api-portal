@@ -28,4 +28,22 @@ router.get("/all", async (req, res) => {
   }
 });
 
+// 3. GET A SINGLE API BY SLUG
+// When the frontend asks for "/api/apis/bank-statement", we find it in the database!
+router.get("/:slug", async (req, res) => {
+  try {
+    // Look in the database for an API where the slug matches the URL
+    const api = await ApiItem.findOne({ slug: req.params.slug });
+    
+    if (!api) {
+      return res.status(404).json({ message: "API not found in database!" });
+    }
+    
+    // If we find it, send the data back to the frontend!
+    res.status(200).json(api);
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+});
+
 export default router;
