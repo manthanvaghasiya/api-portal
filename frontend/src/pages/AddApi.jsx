@@ -23,11 +23,11 @@ const AddApi = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Add new rows for the arrays
+  // Add new rows for the arrays (NOW AT THE TOP!)
   const addRow = (arrayName, emptyObject) => {
     setFormData({
       ...formData,
-      [arrayName]: [...formData[arrayName], emptyObject]
+      [arrayName]: [emptyObject, ...formData[arrayName]] 
     });
   };
 
@@ -68,7 +68,7 @@ const AddApi = () => {
     // Mix the common errors with any custom errors you might have already typed!
     setFormData({
       ...formData,
-      errorData: [...formData.errorData, ...commonErrorsList]
+      errorData: [...commonErrorsList, ...formData.errorData]
     });
   };
 
@@ -104,7 +104,7 @@ const AddApi = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#011112] pt-24 pb-12 px-4 sm:px-6 lg:px-8 transition-colors duration-500">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#011112] pt-30 pb-12 px-4 sm:px-6 lg:px-8 transition-colors duration-500">
       <div className="max-w-5xl mx-auto space-y-8">
         
         {/* HEADER */}
@@ -191,8 +191,8 @@ const AddApi = () => {
   <option value="Numeric">Numeric</option>
   <option value="String">String</option>
   <option value="nvarchar">nvarchar</option>
-  <option value="Boolean">Boolean</option>
-  <option value="Double">Double</option>
+  <option value="text">text</option>
+  <option value="Integer">Integer</option>
   <option value="Date">Date</option> 
   <option value="Object">Object</option>
   <option value="Array">Array</option>
@@ -230,9 +230,10 @@ const AddApi = () => {
   <option value="Alphanumeric">Alphanumeric</option>
   <option value="Numeric">Numeric</option>
   <option value="String">String</option>
-  <option value="Boolean">Boolean</option>
-  <option value="Double">Double</option>
-  <option value="Date">Date</option>
+  <option value="nvarchar">nvarchar</option>
+  <option value="text">text</option>
+  <option value="Integer">Integer</option>
+  <option value="Date">Date</option> 
   <option value="Object">Object</option>
   <option value="Array">Array</option>
 </select>
