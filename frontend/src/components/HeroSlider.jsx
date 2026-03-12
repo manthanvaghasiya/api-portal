@@ -63,7 +63,7 @@ print(response.text)`,
       <div className="relative w-full max-w-[1400px] mx-auto px-6 lg:px-12 flex flex-col z-10">
         
         {/* THIS IS THE MAIN FLEX BOX THAT HOLDS THE TWO SIDES */}
-        <div className="flex flex-col lg:flex-row items-center justify-between w-full gap-16 pt-10 pb-24">
+        <div className="flex flex-col lg:flex-row items-center justify-between w-full gap-16 pt-10 pb-15">
           
           {/* =========================================
               LEFT SIDE: Text and Buttons Block
@@ -192,9 +192,9 @@ print(response.text)`,
         {/* =========================================
             BOTTOM SECTION: Divider & Metrics
             ========================================= */}
-        <hr className="w-full border-slate-200 dark:border-slate-800" />
+        <hr className="w-full border-slate-400 dark:border-slate-800" />
         
-        <div className="flex flex-wrap items-center gap-6 lg:gap-12 pt-8">
+        <div className="flex flex-wrap items-center gap-6 lg:gap-12 pt-4">
           <div className="flex items-center gap-2 text-slate-600 dark:text-slate-400 font-semibold text-sm lg:text-base">
             <Activity size={20} className="text-[#025f61] dark:text-teal-400" /> 99.99% Uptime
           </div>
