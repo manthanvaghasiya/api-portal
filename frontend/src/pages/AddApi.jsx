@@ -194,7 +194,7 @@ const AddApi = () => {
   <option value="text">text</option>
   <option value="Integer">Integer</option>
   <option value="Date">Date</option> 
-  <option value="Object">Object</option>
+  <option value="varchar">varchar</option>
   <option value="Array">Array</option>
    
 </select>
@@ -234,8 +234,8 @@ const AddApi = () => {
   <option value="text">text</option>
   <option value="Integer">Integer</option>
   <option value="Date">Date</option> 
-  <option value="Object">Object</option>
-  <option value="Array">Array</option>
+  <option value="varchar">varchar</option>
+  <option value="Array">Array</option>    
 </select>
                   <input type="text" placeholder="Description" value={row.desc} onChange={(e) => updateRow('outputData', index, 'desc', e.target.value)} className="sm:col-span-2 md:col-span-5 px-3 py-2 rounded-lg text-sm border dark:border-slate-600 bg-white dark:bg-[#0d151c] dark:text-white outline-none" />
                   <button type="button" onClick={() => removeRow('outputData', index)} className="absolute top-2 right-2 md:static md:col-span-1 flex justify-center items-center text-red-500 hover:text-red-700 bg-red-50 dark:bg-red-500/10 p-2 rounded-lg">
