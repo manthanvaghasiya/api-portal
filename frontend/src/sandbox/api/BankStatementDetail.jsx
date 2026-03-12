@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import SandboxNavbar from './SandboxNavbar';
+import SandboxNavbar from '../SandboxNavbar';
 
 const BankStatementDetail = () => {
   const [activeTab, setActiveTab] = useState('input');
