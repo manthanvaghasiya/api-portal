@@ -162,11 +162,13 @@ const AddApi = () => {
   <option value="Alphanumeric">Alphanumeric</option>
   <option value="Numeric">Numeric</option>
   <option value="String">String</option>
+  <option value="nvarchar">nvarchar</option>
   <option value="Boolean">Boolean</option>
   <option value="Double">Double</option>
   <option value="Date">Date</option>
   <option value="Object">Object</option>
   <option value="Array">Array</option>
+   
 </select>
                   <input type="text" placeholder="Mandatory (Y/N)" value={row.mandatory} onChange={(e) => updateRow('inputData', index, 'mandatory', e.target.value)} className="md:col-span-2 px-3 py-2 rounded-lg text-sm border dark:border-slate-600 bg-white dark:bg-[#0d151c] dark:text-white outline-none" />
                   <input type="text" placeholder="Description" value={row.desc} onChange={(e) => updateRow('inputData', index, 'desc', e.target.value)} className="sm:col-span-2 md:col-span-3 px-3 py-2 rounded-lg text-sm border dark:border-slate-600 bg-white dark:bg-[#0d151c] dark:text-white outline-none" />
