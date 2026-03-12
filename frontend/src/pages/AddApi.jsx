@@ -43,6 +43,34 @@ const AddApi = () => {
     const updatedArray = formData[arrayName].filter((_, i) => i !== index);
     setFormData({ ...formData, [arrayName]: updatedArray });
   };
+ 
+  const addCommonErrors = () => {
+    const commonErrorsList = [
+      { code: '8000', name: 'Invalid Encrypted Request', logs: 'Decryption Failure' },
+      { code: '8001', name: 'Json Is Empty', logs: 'Json Schema Request Empty' },
+      { code: '8002', name: 'Invalid Json', logs: 'Json Is Not Valid.' },
+      { code: '8003', name: 'Data Size Limit Exceeded', logs: 'Field Is Not In The Format Mentioned.' },
+      { code: '8004', name: 'Missing Required Field Data', logs: 'Mandatory Field Data Is Missing.' },
+      { code: '8005', name: 'Missing Required Field', logs: 'Mandatory Field Is Missing.' },
+      { code: '8006', name: 'Invalid Field Length', logs: 'Length Of Field Exceeds Defined Length.' },
+      { code: '8007', name: 'Invalid Json,Open Curly Brace Missing.', logs: 'Open Brace Missing In Json.' },
+      { code: '8008', name: 'Invalid Json,End Curly Brace Missing.', logs: 'Closing Brace Missing In Json.' },
+      { code: '8009', name: 'Internal Server Error', logs: 'White Space Characters.' },
+      { code: '8010', name: 'Internal Service Failure', logs: 'Routing Failure.' },
+      { code: '8011', name: 'Backend Host Not Found', logs: 'Backend Host Not Found' },
+      { code: '8012', name: 'Backend Connection Timeout', logs: 'When Connection Gets Timeout' },
+      { code: '8013', name: 'Backend Read Timeout', logs: 'Timed Out For Reading The Response' },
+      { code: '8014', name: 'Backend Bad Url', logs: 'Backend Bad Url' },
+      { code: '8016', name: 'Decryption Failure', logs: 'Request Is Not Encrypted Properly' },
+      { code: '8019', name: 'Respose Encryption Failure', logs: 'Response Cannot Be Encrypted' },
+    ];
+
+    // Mix the common errors with any custom errors you might have already typed!
+    setFormData({
+      ...formData,
+      errorData: [...formData.errorData, ...commonErrorsList]
+    });
+  };
 
   // 🔥 MAGIC: Send data to the Backend Database!
   const handleSubmit = async (e) => {
@@ -165,7 +193,7 @@ const AddApi = () => {
   <option value="nvarchar">nvarchar</option>
   <option value="Boolean">Boolean</option>
   <option value="Double">Double</option>
-  <option value="Date">Date</option>
+  <option value="Date">Date</option> 
   <option value="Object">Object</option>
   <option value="Array">Array</option>
    
@@ -222,9 +250,17 @@ const AddApi = () => {
           <div className="bg-white dark:bg-[#0d151c] p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800">
             <div className="flex justify-between items-center mb-4 border-b border-slate-100 dark:border-slate-800 pb-2">
               <h2 className="text-lg font-bold text-[#0a5e54] dark:text-teal-400">4. Error Data</h2>
-              <button type="button" onClick={() => addRow('errorData', { code: '', name: '', logs: '' })} className="flex items-center gap-1 text-sm bg-slate-100 dark:bg-white/10 hover:bg-slate-200 dark:hover:bg-white/20 px-3 py-1.5 rounded-lg font-bold transition">
-                <Plus size={16} /> Add Row
-              </button>
+              <div className="flex gap-2">
+                {/* NEW COMMON ERRORS BUTTON */}
+                <button type="button" onClick={addCommonErrors} className="flex items-center gap-1 text-sm bg-orange-100 dark:bg-orange-500/20 text-orange-700 dark:text-orange-400 hover:bg-orange-200 dark:hover:bg-orange-500/30 px-3 py-1.5 rounded-lg font-bold transition">
+                  + Add Common Errors
+                </button>
+                
+                {/* EXISTING ADD ROW BUTTON */}
+                <button type="button" onClick={() => addRow('errorData', { code: '', name: '', logs: '' })} className="flex items-center gap-1 text-sm bg-slate-100 dark:bg-white/10 hover:bg-slate-200 dark:hover:bg-white/20 px-3 py-1.5 rounded-lg font-bold transition">
+                  <Plus size={16} /> Add Row
+                </button>
+              </div>
             </div>
             
             <div className="space-y-3">
