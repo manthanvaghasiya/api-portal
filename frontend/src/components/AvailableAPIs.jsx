@@ -58,7 +58,6 @@ const AvailableAPIs = () => {
   ];
 
   return (
-    // FIX 1: Removed all the extra background magic. Now it is a clean, solid background!
     <div className="py-20 lg:py-24 bg-white dark:bg-[#011112] transition-colors duration-500">
       
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
@@ -86,39 +85,45 @@ const AvailableAPIs = () => {
               <div 
                 key={api.id} 
                 onClick={() => navigate(api.link)}
-                className={`group cursor-pointer relative bg-slate-50 dark:bg-[#0a1f20] p-6 rounded-2xl border border-slate-200 dark:border-teal-900/30 shadow-sm hover:shadow-lg hover:-translate-y-2 hover:bg-[#025f61] dark:hover:bg-[#025f61] transition-all duration-400 flex flex-col h-full overflow-hidden ${isLastOddItem ? 'md:col-span-2 lg:col-span-1 xl:col-span-1' : ''}`}
+                /* Notice the change here! The minimum height is now 240px instead of 180px */
+                className={`group cursor-pointer relative bg-slate-50 dark:bg-[#0a1f20] p-6 rounded-2xl border border-slate-200 dark:border-teal-900/30 shadow-sm hover:shadow-lg hover:-translate-y-2 hover:bg-[#025f61] dark:hover:bg-[#025f61] transition-all duration-500 flex flex-col justify-center items-center overflow-hidden ${isLastOddItem ? 'md:col-span-2 lg:col-span-1 xl:col-span-1' : ''}`}
+                style={{ minHeight: '350px' }} 
               >
                 
-                <div className="relative z-10 flex-grow flex flex-col">
-                  
-                  {/* Icon and Title Centered */}
-                  <div className="flex flex-col items-center text-center w-full mb-4">
-                    <div className="w-14 h-14 rounded-xl bg-white dark:bg-[#112a2b] border border-slate-200 dark:border-[#025f61]/40 flex items-center justify-center mb-4 text-[#025f61] dark:text-teal-400 group-hover:scale-110 group-hover:bg-white/20 group-hover:border-white/30 group-hover:text-white transition-all duration-400 shadow-sm">
-                      <Icon size={26} strokeWidth={1.5} />
-                    </div>
-                    
-                    <h3 className="text-lg lg:text-xl font-bold text-slate-900 dark:text-white group-hover:text-white transition-colors duration-400 whitespace-nowrap overflow-hidden text-ellipsis w-full">
-                      {api.title}
-                    </h3>
+                {/* 1. ALWAYS VISIBLE: Just the Icon and the Title */}
+                <div className="flex flex-col items-center text-center w-full transition-transform duration-500 group-hover:-translate-y-2">
+                  <div className="w-14 h-14 rounded-xl bg-white dark:bg-[#112a2b] border border-slate-200 dark:border-[#025f61]/40 flex items-center justify-center mb-4 text-[#025f61] dark:text-teal-400 group-hover:scale-110 group-hover:bg-white/20 group-hover:border-white/30 group-hover:text-white transition-all duration-500 shadow-sm">
+                    <Icon size={26} strokeWidth={1.5} />
                   </div>
                   
-                  {/* Description Left Aligned */}
-                  <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed group-hover:text-white/90 transition-colors duration-400 text-left">
+                  <h3 className="text-lg lg:text-xl font-bold text-slate-900 dark:text-white group-hover:text-white transition-colors duration-500 whitespace-nowrap overflow-hidden text-ellipsis w-full">
+                    {api.title}
+                  </h3>
+                </div>
+                  
+                {/* 2. HIDDEN MAGIC CONTENT: Starts closed, opens smoothly when hovered! */}
+                {/* Notice the change here! The max-height is now 250px instead of 500px */}
+                <div className="max-h-0 opacity-0 overflow-hidden group-hover:max-h-[250px] group-hover:opacity-100 transition-all duration-700 ease-in-out w-full flex flex-col">
+                  
+                  {/* Description */}
+                  <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed group-hover:text-white/90 transition-colors duration-500 text-center mt-3">
                     {api.description}
                   </p>
+
+                  {/* Animated Bottom Link */}
+                  <div className="mt-5 pt-4 border-t border-slate-200 dark:border-white/5 group-hover:border-white/20 flex items-center justify-center text-[#025f61] dark:text-teal-400 group-hover:text-white font-semibold text-sm transition-colors duration-500">
+                    Explore Integration 
+                    <ChevronRight size={16} className="ml-1 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300 delay-100" />
+                  </div>
+                  
                 </div>
 
-                {/* Animated Bottom Link */}
-                <div className="mt-6 pt-5 border-t border-slate-200 dark:border-white/5 group-hover:border-white/20 flex items-center justify-start text-[#025f61] dark:text-teal-400 group-hover:text-white font-semibold text-sm transition-colors duration-400">
-                  Explore Integration 
-                  <ChevronRight size={16} className="ml-1 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300" />
-                </div>
               </div>
             );
           })}
         </div>
 
-        {/* FIX 2: A clean, highly professional, solid button. No extra dots or gradients. */}
+        {/* The Browse All APIs Button */}
         <div className="mt-16 flex justify-center w-full">
            <button 
              onClick={() => navigate('/explore')}
