@@ -2,6 +2,7 @@ import React from 'react';
 import HeroSlider from '../components/HeroSlider';
 import HowItWorks from '../components/HowItWorks';
 import JourneyLive from '../components/JourneyLive';
+import AvailableAPIs from '../components/AvailableAPIs';
 
 const Home = () => {
   return (
@@ -9,6 +10,7 @@ const Home = () => {
       <HeroSlider />
       <HowItWorks />
       <JourneyLive />
+      <AvailableAPIs />
     </div>
   );
 };
