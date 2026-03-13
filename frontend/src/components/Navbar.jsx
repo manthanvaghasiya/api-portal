@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { User, LogOut, Menu, X, Sun, Moon,  } from 'lucide-react'; 
+import { User, LogOut, Menu, X, Sun, Moon } from 'lucide-react'; 
 
 const Navbar = () => {
   const location = useLocation();
@@ -64,39 +64,42 @@ const Navbar = () => {
   return (
     <div className={`fixed w-full z-50 flex justify-center transition-all duration-500 ${
       isScrolled 
-        ? 'top-0 py-3 lg:py-4 bg-white dark:bg-[#011617] shadow-md border-b border-slate-200 dark:border-[#025f61]/50' 
+        // 🌟 Changed to gradient here!
+        ? 'top-0 py-3 lg:py-4 bg-gradient-to-r from-[#025f61] to-[#0a5e54] shadow-md border-b border-white/20' 
         : 'top-4 lg:top-6 px-4 lg:px-8'
     }`}>
       
       <nav className={`w-full max-w-7xl flex justify-between items-center transition-all duration-500 ${
         isScrolled 
           ? 'px-4 lg:px-6' 
-          : 'bg-white dark:bg-[#011617] shadow-xl shadow-slate-200/50 dark:shadow-[#025f61]/40 border border-slate-200 dark:border-[#025f61]/50 rounded-2xl lg:rounded-full px-4 lg:px-6 py-3'
+          // 🌟 Changed to gradient here too!
+          : 'bg-gradient-to-r from-[#025f61] to-[#0a5e54] shadow-xl shadow-[#025f61]/40 border border-white/20 rounded-2xl lg:rounded-full px-4 lg:px-6 py-3'
       }`}>
         
         {/* LEFT SIDE: Logo Area */}
         <div className="flex items-center">
           <Link to="/" className="flex items-center group gap-2 lg:gap-3">
-            <div className="bg-slate-100 dark:bg-white/10 rounded-full group-hover:bg-slate-200 dark:group-hover:bg-white/20 group-hover:scale-105 transition-all duration-300">
-                <img className="h-8 lg:h-10 w-auto p-1" src="/logo.png" alt="Logo" />
+            <div >
+                <img className="h-8 lg:h-10 w-auto rounded-full" src="/logo.png" alt="Logo" />
             </div>
-            <span className="font-bold text-lg lg:text-xl tracking-tight text-slate-800 dark:text-white transition-colors">
+            {/* 🌟 Made text white */}
+            <span className="font-bold text-lg lg:text-xl tracking-tight text-white transition-colors">
               Arcelor Api-Portal
             </span>
           </Link>
         </div>
 
         {/* MIDDLE: Desktop Links */}
-        <div className="hidden lg:flex space-x-1 items-center bg-slate-100 dark:bg-white/5 p-1.5 rounded-full border border-slate-200 dark:border-white/5 shadow-inner transition-colors">
+        <div className="hidden lg:flex space-x-1 items-center bg-white/10 p-1.5 rounded-full border border-white/20 shadow-inner transition-colors">
           {navLinks.map((link) => (
             <Link 
               key={link.name}
               to={link.path} 
-              className={`px-5 py-2 text-sm font-semibold rounded-full transition-all duration-300 ${
-                isActive(link.path) 
-                  ? 'bg-[#025f61] text-white shadow-md shadow-[#025f61]/20 dark:bg-[#025f61] dark:shadow-[#025f61]/40' 
-                  : 'text-slate-500 hover:text-[#025f61] hover:bg-white dark:text-teal-50/60 dark:hover:text-white dark:hover:bg-white/10'
-              }`}
+                className={`px-5 py-2 text-sm font-semibold rounded-full transition-all duration-300 ${
+                  isActive(link.path) 
+                    ? 'bg-white text-[#025f61] shadow-md' // Active link is white box with teal text
+                    : 'text-white hover:text-white hover:bg-white/20' // Inactive links are white
+                }`}
             >
               {link.name}
             </Link>
@@ -108,8 +111,8 @@ const Navbar = () => {
               to="/add-api" 
               className={`flex items-center gap-1 px-5 py-2 text-sm font-semibold rounded-full transition-all duration-300 ${
                 isActive('/add-api') 
-                  ? 'bg-[#0a5e54] text-white shadow-md' 
-                  : 'text-[#0a5e54] hover:text-[#025f61] hover:bg-white dark:text-teal-400 dark:hover:text-white dark:hover:bg-white/10'
+                  ? 'bg-white text-[#025f61] shadow-md' 
+                  : 'text-white hover:bg-white/20'
               }`}
             >
                Add API
@@ -123,7 +126,7 @@ const Navbar = () => {
           {/* THEME TOGGLE BUTTON */}
           <button 
             onClick={toggleTheme}
-            className="p-2 rounded-full text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-white/10 transition-colors"
+            className="p-2 rounded-full text-white hover:bg-white/20 transition-colors"
             aria-label="Toggle Dark Mode"
           >
             {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
@@ -133,7 +136,7 @@ const Navbar = () => {
             <div className="relative">
               <button 
                 onClick={() => setIsProfileOpen(!isProfileOpen)} 
-                className="flex items-center space-x-2 bg-[#0a5e54] text-white px-4 py-2 rounded-full hover:bg-[#084d46] transition shadow-md shadow-[#0a5e54]/20"
+                className="flex items-center space-x-2 bg-white text-[#025f61] px-4 py-2 rounded-full hover:bg-gray-100 transition shadow-md"
               >
                 <User size={18} />
                 <span>{user?.fullName?.split(" ")[0] || "Profile"}</span>
@@ -156,10 +159,10 @@ const Navbar = () => {
             </div>
           ) : (
             <div className="space-x-2">
-              <Link to="/signin" className="text-[#0a5e54] dark:text-teal-400 font-semibold hover:underline px-4">
+              <Link to="/signin" className="text-white font-semibold hover:underline px-4">
                 Sign In
               </Link>
-              <Link to="/signup" className="bg-[#0a5e54] text-white px-6 py-2 rounded-full hover:bg-[#084d46] transition shadow-md shadow-[#0a5e54]/20">
+              <Link to="/signup" className="bg-white text-[#025f61] px-6 py-2 rounded-full hover:bg-gray-100 transition shadow-md">
                 Sign Up
               </Link>
             </div>
@@ -171,14 +174,14 @@ const Navbar = () => {
           
           <button 
             onClick={toggleTheme}
-            className="p-2 rounded-full text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-white/10 transition-colors"
+            className="p-2 rounded-full text-white hover:bg-white/20 transition-colors"
           >
             {isDarkMode ? <Sun size={22} /> : <Moon size={22} />}
           </button>
 
           <button 
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="text-slate-600 dark:text-slate-300 hover:text-[#0a5e54] p-2"
+            className="text-white hover:bg-white/20 p-2 rounded-full transition-colors"
           >
             {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
@@ -188,7 +191,8 @@ const Navbar = () => {
       {/* MOBILE MENU DROPDOWN */}
       {isMobileMenuOpen && (
         <div className="absolute top-full left-0 w-full mt-2 px-4 lg:hidden">
-          <div className="bg-white dark:bg-[#011617] rounded-2xl shadow-xl border border-slate-200 dark:border-[#025f61]/50 p-4 flex flex-col gap-2">
+          {/* 🌟 Mobile menu now also has the gradient background! */}
+          <div className="bg-gradient-to-b from-[#025f61] to-[#0a5e54] rounded-2xl shadow-xl border border-white/20 p-4 flex flex-col gap-2">
             
             {/* Mobile Links */}
             {navLinks.map((link) => (
@@ -197,8 +201,8 @@ const Navbar = () => {
                 to={link.path} 
                 className={`px-4 py-3 rounded-xl font-semibold transition-colors ${
                   isActive(link.path)
-                    ? 'bg-[#025f61]/10 text-[#025f61] dark:bg-[#025f61]/20 dark:text-teal-400'
-                    : 'text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-white/5'
+                    ? 'bg-white text-[#025f61]'
+                    : 'text-white hover:bg-white/10'
                 }`}
               >
                 {link.name}
@@ -211,35 +215,35 @@ const Navbar = () => {
                 to="/add-api" 
                 className={`flex items-center gap-2 px-4 py-3 rounded-xl font-bold transition-colors ${
                   isActive('/add-api')
-                    ? 'bg-[#0a5e54]/10 text-[#0a5e54] dark:bg-[#0a5e54]/20 dark:text-teal-400'
-                    : 'text-[#0a5e54] dark:text-teal-400 hover:bg-slate-50 dark:hover:bg-white/5'
+                    ? 'bg-white text-[#025f61]'
+                    : 'text-white hover:bg-white/10'
                 }`}
               >
                  Add API
               </Link>
             )}
 
-            <hr className="my-2 border-slate-200 dark:border-white/10" />
+            <hr className="my-2 border-white/20" />
 
             {/* Mobile Auth */}
             {token ? (
               <div className="flex flex-col gap-2">
-                <div className="px-4 py-2 text-sm text-slate-500 dark:text-slate-400 font-medium truncate">
+                <div className="px-4 py-2 text-sm text-white/80 font-medium truncate">
                   Signed in as {user?.email}
                 </div>
                 <button 
                   onClick={handleLogout}
-                  className="w-full flex justify-center items-center gap-2 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 py-3 rounded-xl font-bold transition-colors"
+                  className="w-full flex justify-center items-center gap-2 bg-red-500 text-white py-3 rounded-xl font-bold transition-colors hover:bg-red-600"
                 >
                   <LogOut size={18} /> Logout
                 </button>
               </div>
             ) : (
               <div className="flex flex-col gap-3">
-                <Link to="/signin" className="w-full text-center text-[#0a5e54] dark:text-teal-400 font-bold py-2">
+                <Link to="/signin" className="w-full text-center text-white font-bold py-2 hover:underline">
                   Sign In
                 </Link>
-                <Link to="/signup" className="w-full text-center bg-[#0a5e54] text-white py-3 rounded-xl font-bold hover:bg-[#084d46] transition">
+                <Link to="/signup" className="w-full text-center bg-white text-[#025f61] py-3 rounded-xl font-bold hover:bg-gray-100 transition">
                   Sign Up
                 </Link>
               </div>
