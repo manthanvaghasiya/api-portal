@@ -142,7 +142,7 @@ const FAQ = () => {
                 >
                   <span className={`font-bold text-lg transition-colors duration-300 ${
                     isOpen 
-                      ? 'text-[#025f61] dark:text-teal-300' 
+                      ? 'text-[#025f61] dark:text-teal-900' 
                       : 'text-slate-700 dark:text-white/90'
                   }`}>
                     {faq.question}
@@ -166,7 +166,7 @@ const FAQ = () => {
                   }`}
                 >
                   <div className="overflow-hidden">
-                    <div className="px-6 pb-6 text-slate-600 dark:text-white/70 leading-relaxed border-t border-slate-100 dark:border-white/5 pt-4">
+                    <div className="px-6 pb-6 text-slate-600 dark:text-black leading-relaxed border-t border-slate-500 dark:border-white pt-4">
                       {faq.answer}
                     </div>
                   </div>
