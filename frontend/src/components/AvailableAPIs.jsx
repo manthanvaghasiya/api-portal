@@ -58,13 +58,30 @@ const AvailableAPIs = () => {
   ];
 
   return (
-    <div className="py-20 lg:py-24 bg-white dark:bg-[#011112] transition-colors duration-500">
+    // 1. We added 'relative' and 'overflow-hidden' so our background stays inside this section
+    <div className="relative py-20 lg:py-24 bg-slate-50 dark:bg-[#011112] transition-colors duration-500 overflow-hidden">
       
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+      {/* ============================================================== */}
+      {/* 2. THE NEW MAGIC BACKGROUND */}
+      {/* ============================================================== */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+         {/* The beautiful grid lines */}
+         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] dark:bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)]"></div>
+         
+         {/* The soft glowing teal light at the top center */}
+         <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[400px] w-[600px] rounded-full bg-[#025f61] opacity-10 dark:opacity-20 blur-[100px]"></div>
+         
+         {/* A soft glowing light at the bottom right */}
+         <div className="absolute bottom-0 right-0 -z-10 h-[300px] w-[300px] rounded-full bg-teal-400 opacity-10 blur-[100px]"></div>
+      </div>
+      {/* ============================================================== */}
+
+      {/* 3. We added 'relative z-10' here so the text and cards sit ON TOP of the background */}
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12">
         
         {/* Top Title Section */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-50 dark:bg-[#025f61]/10 text-[#025f61] dark:text-teal-300 font-bold text-[13px] mb-6 border border-slate-200 dark:border-[#025f61]/30 shadow-sm">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-[#025f61]/10 text-[#025f61] dark:text-teal-300 font-bold text-[13px] mb-6 border border-slate-200 dark:border-[#025f61]/30 shadow-sm">
             <Layers size={16} /> API Collection
           </div>
           <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-4 tracking-tight">
@@ -85,14 +102,13 @@ const AvailableAPIs = () => {
               <div 
                 key={api.id} 
                 onClick={() => navigate(api.link)}
-                /* Notice the change here! The minimum height is now 240px instead of 180px */
-                className={`group cursor-pointer relative bg-slate-50 dark:bg-[#0a1f20] p-6 rounded-2xl border border-slate-200 dark:border-teal-900/30 shadow-sm hover:shadow-lg hover:-translate-y-2 hover:bg-[#025f61] dark:hover:bg-[#025f61] transition-all duration-500 flex flex-col justify-center items-center overflow-hidden ${isLastOddItem ? 'md:col-span-2 lg:col-span-1 xl:col-span-1' : ''}`}
+                className={`group cursor-pointer relative bg-white dark:bg-[#0a1f20] p-6 rounded-2xl border border-slate-200 dark:border-teal-900/30 shadow-sm hover:shadow-xl hover:-translate-y-2 hover:bg-[#025f61] dark:hover:bg-[#025f61] transition-all duration-500 flex flex-col justify-center items-center overflow-hidden ${isLastOddItem ? 'md:col-span-2 lg:col-span-1 xl:col-span-1' : ''}`}
                 style={{ minHeight: '350px' }} 
               >
                 
                 {/* 1. ALWAYS VISIBLE: Just the Icon and the Title */}
                 <div className="flex flex-col items-center text-center w-full transition-transform duration-500 group-hover:-translate-y-2">
-                  <div className="w-14 h-14 rounded-xl bg-white dark:bg-[#112a2b] border border-slate-200 dark:border-[#025f61]/40 flex items-center justify-center mb-4 text-[#025f61] dark:text-teal-400 group-hover:scale-110 group-hover:bg-white/20 group-hover:border-white/30 group-hover:text-white transition-all duration-500 shadow-sm">
+                  <div className="w-14 h-14 rounded-xl bg-slate-50 dark:bg-[#112a2b] border border-slate-200 dark:border-[#025f61]/40 flex items-center justify-center mb-4 text-[#025f61] dark:text-teal-400 group-hover:scale-110 group-hover:bg-white/20 group-hover:border-white/30 group-hover:text-white transition-all duration-500 shadow-sm">
                     <Icon size={26} strokeWidth={1.5} />
                   </div>
                   
@@ -102,7 +118,6 @@ const AvailableAPIs = () => {
                 </div>
                   
                 {/* 2. HIDDEN MAGIC CONTENT: Starts closed, opens smoothly when hovered! */}
-                {/* Notice the change here! The max-height is now 250px instead of 500px */}
                 <div className="max-h-0 opacity-0 overflow-hidden group-hover:max-h-[250px] group-hover:opacity-100 transition-all duration-700 ease-in-out w-full flex flex-col">
                   
                   {/* Description */}
